@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'colors.dart';
+
 
 ThemeData darkTheme=ThemeData(
   fontFamily: 'PTS',
@@ -14,12 +16,9 @@ ThemeData darkTheme=ThemeData(
         )
     ),
     scaffoldBackgroundColor: HexColor('333739'),
-    primarySwatch: Colors.deepOrange,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.deepOrange
-    ),
+    primarySwatch: defaultColor,
     bottomNavigationBarTheme:  BottomNavigationBarThemeData(
-      selectedItemColor: Colors.deepOrange,
+      selectedItemColor: defaultColor,
       unselectedItemColor: Colors.grey,
       backgroundColor:HexColor('333739') ,
       elevation: 25,
@@ -47,12 +46,9 @@ ThemeData lightTheme=ThemeData(
             color: Colors.black
         )
     ),
-    primarySwatch: Colors.deepOrange,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.deepOrange
-    ),
+    primarySwatch: defaultColor,
     bottomNavigationBarTheme:  BottomNavigationBarThemeData(
-      selectedItemColor: Colors.deepOrange,
+      selectedItemColor: defaultColor,
       unselectedItemColor: Colors.grey,
       backgroundColor:Colors.white ,
       elevation: 25,

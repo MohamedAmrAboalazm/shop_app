@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/shop_login_screen.dart';
 import 'package:shop_app/shared/components.dart';
+import 'package:shop_app/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BoardingModel{
@@ -58,7 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
                   // ignore: prefer_const_constructors
                   effect: ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: Colors.deepOrange,
+                    activeDotColor:defaultColor,
                     dotHeight: 10,
                     dotWidth: 10,
                     expansionFactor: 3,

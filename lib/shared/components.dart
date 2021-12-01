@@ -3,6 +3,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/shared/styles/colors.dart';
 
 Widget buildArticleItem(article,context) => Padding(
   padding: const EdgeInsets.all(20.0),
@@ -76,9 +77,13 @@ Widget defaulyFormField(
       bool isClickable = true,
       @required String  labelText,
       @required  Function  validator,
+      Function  submitt,
       Function  onChange,
+      Function  suffixPressed,
+
     }) {
   return TextFormField(
+    onFieldSubmitted: submitt,
     enabled: isClickable,
     onTap: onTap,
     onChanged: onChange,
@@ -88,12 +93,23 @@ Widget defaulyFormField(
     obscureText: obscuretext,
     decoration: InputDecoration(
       prefixIcon: Icon(prefixicon),
-      suffixIcon: suffixicon != null ? Icon(suffixicon) : null,
+      suffixIcon: suffixicon != null ?IconButton(onPressed:suffixPressed,icon: Icon(suffixicon)) : null,
       labelText: labelText,
       border: OutlineInputBorder(),
     ),
   );
 }
+Widget defaultButton({String text,Function onPressed,})=>Container(
+  width: double.infinity,
+  decoration: BoxDecoration(
+    color: defaultColor,
+    borderRadius: BorderRadius.circular(5),
+  ),
+  child: MaterialButton(
+      onPressed: onPressed,
+    child: Text(text.toUpperCase(),style:TextStyle(color: Colors.white),),
+  ),
+);
 void navigateTo(context,widget)=>Navigator.push(
     context,
     MaterialPageRoute(builder: (context)=>widget
