@@ -1,6 +1,6 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/shop_login_screen.dart';
+import 'package:shop_app/modules/shop_login_screen.dart';
 import 'package:shop_app/shared/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -25,14 +25,16 @@ class OnBoardingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          TextButton(onPressed: (){
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute<void>(builder: (BuildContext context) => ShopLoginScreen()), (route) => false);
-          }, child: Text("SKIP"))
+          TextButton(
+              onPressed: (){
+            navigateAndFinsh(context,ShopLoginScreen());
+           }, child: Text("SKIP"))
         ],
       ),
       body:Padding(
         padding: const EdgeInsets.all(30.0),
-        child: Column(children:
+        child: Column(
+          children:
         [
           Expanded(
             child: PageView.builder(
@@ -94,16 +96,16 @@ class OnBoardingScreen extends StatelessWidget {
   crossAxisAlignment: CrossAxisAlignment.start,
   children:
   [
-  Expanded(
-  child: Image(
+   Expanded(
+   child: Image(
   image:AssetImage(bording.image)
   ),
   ),
    SizedBox(height: 30,),
     Text(bording.title,style:TextStyle(fontSize: 24,),),
-  SizedBox(
+    SizedBox(
   height: 15,),
-  Text(bording.body,style:TextStyle(fontSize: 14),),
+   Text(bording.body,style:TextStyle(fontSize: 14),),
 
   ],);
 }

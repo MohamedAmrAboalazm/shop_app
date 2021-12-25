@@ -2,9 +2,10 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/cubit/states.dart';
-import 'package:shop_app/models/shop_register_screen.dart';
+import 'package:shop_app/modules/shop_register_screen.dart';
 import 'package:shop_app/shared/components.dart';
 
 class ShopLoginScreen extends StatelessWidget {
@@ -16,7 +17,30 @@ class ShopLoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit,ShopLoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ShopLoginSucessState)
+            {
+              if(state.loginModel.status)
+                {
+                  print(state.loginModel.message);
+                  print(state.loginModel.data.token);
+
+                }
+              else
+                print(state.loginModel.message);
+              Fluttertoast.showToast(
+                  msg: state.loginModel.message,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 5,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+
+            }
+
+        },
         builder: (context, state) => Scaffold(
           appBar:AppBar(),
           body: Center(
@@ -37,11 +61,18 @@ class ShopLoginScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyText1
                             .copyWith(color: Colors.grey),),
                       SizedBox(height: 30,),
-                      defaulyFormField(
+                      defaultFormField(
                           prefixicon: Icons.email,
                           controller: emailcontroller,
                           keyboardtype: TextInputType.emailAddress,
                           labelText: 'Email Address',
+                          submitt: (value){
+                            if(formKey.currentState.validate())
+                            {
+                              ShopLoginCubit.get(context)
+                                  .userLogin(email: emailcontroller.text, password: passwordcontroller.text);
+                            }
+                          },
                           validator: (String value){
                             if(value.isEmpty)
                             {
@@ -50,7 +81,7 @@ class ShopLoginScreen extends StatelessWidget {
                             return null;
                           }),
                       SizedBox(height: 15,),
-                      defaulyFormField(
+                      defaultFormField(
 
                           prefixicon: Icons.lock_outline,
                           suffixicon: ShopLoginCubit.get(context).suffix,

@@ -67,7 +67,7 @@ Widget articleBuilder(list,context,{isSearch=false})=>ConditionalBuilder(
   ,);
 
 
-Widget defaulyFormField(
+Widget defaultFormField(
     {@required IconData  prefixicon,
       @required TextEditingController controller,
       @required TextInputType keyboardtype,
