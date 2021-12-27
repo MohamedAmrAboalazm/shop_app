@@ -1,6 +1,7 @@
 // @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:shop_app/modules/shop_login_screen.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/shared/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,13 +22,20 @@ class OnBoardingScreen extends StatelessWidget {
     BoardingModel(image: "assets/images/onboard_1.jpg", title: "On Board 2 Title", body: "On Board 2 Screen"),
     BoardingModel(image: "assets/images/onboard_1.jpg", title: "On Board 3 Title", body: "On Board 3 Screen"),
   ];
+  void submit(context)
+  {
+    CacheHelper.saveData(key: "onBoarding", value: true).then((value) {
+        navigateAndFinsh(context,ShopLoginScreen());
+    });
+
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           TextButton(
               onPressed: (){
-            navigateAndFinsh(context,ShopLoginScreen());
+                submit(context);
            }, child: Text("SKIP"))
         ],
       ),
@@ -73,7 +81,7 @@ class OnBoardingScreen extends StatelessWidget {
                 onPressed: (){
                   if(isLast)
                     {
-                      navigateAndFinsh(context, ShopLoginScreen());
+                      submit(context);
                     }
                   else {
                     boardController.nextPage(
@@ -108,4 +116,5 @@ class OnBoardingScreen extends StatelessWidget {
    Text(bording.body,style:TextStyle(fontSize: 14),),
 
   ],);
+
 }

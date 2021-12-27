@@ -6,7 +6,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/modules/shop_register_screen.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/shared/components.dart';
+import 'package:shop_app/shop_layout.dart';
 
 class ShopLoginScreen extends StatelessWidget {
   var formKey=GlobalKey<FormState>();
@@ -24,19 +26,20 @@ class ShopLoginScreen extends StatelessWidget {
                 {
                   print(state.loginModel.message);
                   print(state.loginModel.data.token);
+                  CacheHelper.saveData(key: "token", value:state.loginModel.data.token)
+                      .then((value){
+                        navigateAndFinsh(context, ShopLayout());
+                  } );
 
                 }
               else
-                print(state.loginModel.message);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
+                {
+                  print(state.loginModel.message);
+                  showToast(message: state.loginModel.message,state:ToastStates.ERORR);
+                }
+
+
+
 
             }
 
@@ -115,6 +118,7 @@ class ShopLoginScreen extends StatelessWidget {
                             {
                               ShopLoginCubit.get(context)
                                   .userLogin(email: emailcontroller.text, password: passwordcontroller.text);
+
                             }
 
                         }) ,

@@ -3,6 +3,8 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/models/model_login.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 Widget buildArticleItem(article,context) => Padding(
@@ -119,6 +121,39 @@ void navigateAndFinsh(context,widget)=>Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(builder: (context)=> widget,),
         (route) => false);
+void showToast({@required String message,ToastStates state}){
+  Fluttertoast.showToast(
+      msg:message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor:chosseToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+
+}
+   enum ToastStates {SUCCES,ERORR,WARNING}
+   Color chosseToastColor(ToastStates state)
+   {
+     Color color;
+     switch(state)
+     {
+       case ToastStates.SUCCES:
+         color=Colors.green;
+          break;
+       case ToastStates.ERORR:
+         color=Colors.red;
+         break;
+       case ToastStates.WARNING:
+         color=Colors.amber;
+         break;
+     }
+     return color;
+
+
+   }
+
 
 
 
