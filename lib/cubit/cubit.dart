@@ -3,43 +3,60 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/states.dart';
-import 'package:shop_app/models/model_login.dart';
-import 'package:shop_app/network/remote/dio_helper.dart';
+import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/modules/cateogries_screen.dart';
+import 'package:shop_app/modules/favourites_screen.dart';
+import 'package:shop_app/modules/products_screen.dart';
+import 'package:shop_app/modules/settings_screen.dart';
 import 'package:shop_app/network/end_points.dart';
+import 'package:shop_app/network/remote/dio_helper.dart';
+import 'package:shop_app/shared/styles/constants.dart';
 
+class ShopCubit extends Cubit<ShopStates> {
+  ShopCubit() : super(ShopInitialState());
 
-class ShopLoginCubit extends Cubit<ShopLoginState>{
-  ShopLoginCubit() : super(ShopLoginInitialState());
-
-  static ShopLoginCubit get(context)=>BlocProvider.of(context);
-  ShopLoginModel loginModel;
-
-  void userLogin({@required String email,@required String password})
-  {
-    emit(ShopLoginLoadingState());
-   DioHelper.postData(url:LOGIN
-       , data:
-       {
-         "email":email,
-         "password":password
-       }).then((value){
-     loginModel=ShopLoginModel.fromJson(value.data);
-       emit(ShopLoginSucessState(loginModel));
-   }
-
-   ).catchError((e){
-     print(e.toString());
-     emit(ShopLoginErorrState(e.toString()));
-   });
+  static ShopCubit get(context) => BlocProvider.of(context);
+  int CurrentIndex = 0;
+  List<Widget> bottomScreens = [
+    ProductsScreen(),
+    CategoriesScreen(),
+    FavouritesScreen(),
+    SettingsScreen(),
+  ];
+  List<BottomNavigationBarItem> BottomItem = [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: "Home",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.category),
+      label: "Categories",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.favorite),
+      label: "Favorite",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      label: "Settings",
+    ),
+  ];
+  void changeIndex(int index) {
+    CurrentIndex = index;
+    emit(ShopBottomNavStyate());
   }
-
-  IconData suffix=Icons.visibility_outlined;
-  bool isPassword=true;
-  void changePasswordVisibility()
+  HomeModel homeModel;
+  void getHomeData()
   {
-    isPassword=!isPassword;
-    suffix=isPassword?Icons.visibility_outlined:Icons.visibility_off_outlined;
-    emit(ShopChangePasswordVisibilityState());
-
+    emit(ShopLoadingState());
+    DioHelper.getData(url: HOME,token:token).then((value)
+    {
+      homeModel=HomeModel.fromJson(value.data);
+      print(homeModel.data.Products[0].image);
+      emit(ShopSuccessDataState());
+    }).catchError((erorr){
+      print(erorr.toString());
+      emit(ShopErorrDataState());
+    });
   }
 }

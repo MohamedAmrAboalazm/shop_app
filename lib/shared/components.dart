@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/models/model_login.dart';
+import 'package:shop_app/modules/shop_login_screen.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 Widget buildArticleItem(article,context) => Padding(
@@ -152,6 +154,12 @@ void showToast({@required String message,ToastStates state}){
      return color;
 
 
+   }
+   void signOut(context){
+     CacheHelper.removeData(key: "token").then((value)
+     {
+       navigateAndFinsh(context, ShopLoginScreen());
+     });
    }
 
 
