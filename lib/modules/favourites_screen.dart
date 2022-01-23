@@ -16,10 +16,9 @@ class FavouritesScreen extends StatelessWidget {
      listener: (context, state) {
        if(state is ShopSuccessChangeFavoritesDataState)
        {
-         //if(!ShopCubit.get(context).changeFavoriteModel.status)
-         //  {
+
          showToast(message: ShopCubit.get(context).changeFavoriteModel.message,state: ToastStates.SUCCES);
-         // }
+
        }
      } ,
         builder: (context, state) =>
