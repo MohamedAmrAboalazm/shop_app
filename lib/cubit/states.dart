@@ -16,4 +16,12 @@ class ShopErorrCategoriesDataState extends ShopStates{}
 
 class ShopSuccessChangeFavoritesDataState extends ShopStates{}
 
+class ShopChangeFavoritesDataState extends ShopStates{}
+
 class ShopErorrChangeFavoritesDataState extends ShopStates{}
+
+class ShopSuccessFavoriteDataState extends ShopStates{}
+
+class ShopLoadingFavoriteDataState extends ShopStates{}
+
+class ShopErorrFavoritesDataState extends ShopStates{}

@@ -4,17 +4,27 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/shared/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is ShopSuccessChangeFavoritesDataState)
+          {
+            //if(!ShopCubit.get(context).changeFavoriteModel.status)
+            //  {
+                showToast(message: ShopCubit.get(context).changeFavoriteModel.message,state: ToastStates.SUCCES);
+             // }
+          }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: ShopCubit.get(context).homeModel != null &&
@@ -202,7 +212,6 @@ class ProductsScreen extends StatelessWidget {
                           onPressed: () {
                                ShopCubit.get(context).changeFavourite(productsModel.id);
                           },
-                          // ignore: prefer_const_constructors
                           icon: CircleAvatar(
                               radius: 15,
                               backgroundColor:ShopCubit.get(context).Favourites[productsModel.id]?defaultColor:Colors.grey,

@@ -15,7 +15,6 @@ class FavoriteDataModel {
   int id;
   ProductFavoriteModel product;
 
-
   FavoriteDataModel.fromJson(Map<String, dynamic> json)
   {
     id=json['id'];
