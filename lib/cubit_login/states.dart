@@ -19,4 +19,13 @@ class ShopLoginErorrState extends ShopLoginState
  final String erorr;
  ShopLoginErorrState(this.erorr);
 }
+class ShopRegisterLoadingState extends ShopLoginState{}
 
+class ShopRegisterSucessState extends ShopLoginState{
+ final ShopLoginModel register;
+
+ ShopRegisterSucessState(this.register);
+}
+
+class ShopRegisterErorrState extends ShopLoginState
+{}

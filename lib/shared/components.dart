@@ -4,6 +4,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/cubit/cubit.dart';
 import 'package:shop_app/models/model_login.dart';
 import 'package:shop_app/modules/shop_login_screen.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
@@ -161,6 +162,99 @@ void showToast({@required String message,ToastStates state}){
        navigateAndFinsh(context, ShopLoginScreen());
      });
    }
+Widget buildListProduct( model,context,{bool isOldPrice=true,String text})
+{
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Container(
+      height: 120,
+      child: Row(
+        children: [
+          Container(
+            height: 120,
+            width: 120,
+            child: Stack(
+              alignment: AlignmentDirectional.bottomStart,
+              children: [
+                Image(
+                  image: NetworkImage(
+                      model.image),
+                  width: 120,
+                  height: 120,
+                ),
+                if (model.discount != 0 && isOldPrice)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    color: Colors.red,
+                    // ignore: prefer_const_constructors
+                    child: Text(
+                      'DISCOUNT',
+                      // ignore: prefer_const_constructors
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+              ],
+            ),
+          ),
+          SizedBox(width: 20,),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Spacer(),
+                Row(
+                  children: [
+                    Text(
+                      model.price.toString(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: defaultColor,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    if (model.discount != 0 && isOldPrice)
+                      Text(
+                        model.oldPrice.toString(),
+                        // ignore: prefer_const_constructors
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough),
+                      ),
+                    Spacer(),
+                    IconButton(
+                        onPressed: () {
+                          ShopCubit.get(context).changeFavourite(model.id,text: text);
+                        },
+                        icon: CircleAvatar(
+                            radius: 15,
+                            backgroundColor:ShopCubit.get(context).Favourites[model.id]?defaultColor:Colors.grey,
+                            // ignore: prefer_const_constructors
+                            child: Icon(
+                              Icons.favorite_border,
+                              size: 14,
+                              color: Colors.white,
+                            ))),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
 
 
 

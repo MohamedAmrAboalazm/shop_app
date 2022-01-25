@@ -8,6 +8,7 @@ import 'package:shop_app/models/change_favorite_model.dart';
 import 'package:shop_app/models/favorite_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/models/model_login.dart';
+import 'package:shop_app/models/search_model.dart';
 import 'package:shop_app/modules/cateogries_screen.dart';
 import 'package:shop_app/modules/favourites_screen.dart';
 import 'package:shop_app/modules/products_screen.dart';
@@ -54,6 +55,7 @@ class ShopCubit extends Cubit<ShopStates> {
   ChangeFavoriteModel changeFavoriteModel;
   FavoriteModel favoriteModel;
   ShopLoginModel userModel;
+  SearchModel searchModel;
   Map<int,bool> Favourites={};
   void getHomeData()
   {
@@ -87,10 +89,10 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  void changeFavourite(int productId)
+  void changeFavourite(int productId,{String text})
   {
     Favourites[productId]= !Favourites[productId];
-    emit(ShopChangeFavoritesDataState());
+    //emit(ShopChangeFavoritesDataState());
     DioHelper.postData(url: FAVORITES,data:{"product_id":productId},token: token).then((value)
     {
 
@@ -102,6 +104,10 @@ class ShopCubit extends Cubit<ShopStates> {
         }else
           {
             getFavorite();
+           if(state is ShopSuccessSearchDataState) {
+             getFavorite();
+             searchProducts(text: text);
+           }
           }
           
       emit(ShopSuccessChangeFavoritesDataState());
@@ -138,4 +144,41 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(ShopErorrUserDataState());
     });
   }
+  void updateUserData({@required String name,@required String email,@required String phone})
+  {
+    emit(ShopLoadingUpdateUserDataState());
+    DioHelper.putData(url: UPDATE_PROFILE,token: token,
+        data:
+        {
+          "name":name,
+          "email":email,
+          "phone":phone,
+        })
+        .then((value)  {
+      userModel=ShopLoginModel.fromJson(value.data);
+      print(userModel.message);
+      emit(ShopSuccessUpdateUserDataState(userModel));
+    }).catchError((erorr){
+      print(erorr);
+      emit(ShopErorrUpdateUserDataState());
+    });
+  }
+  void searchProducts({ String text})
+  {
+    emit(ShopLoadingSearchDataState());
+    DioHelper.postData(url: SEARCHPRODUCTS,token: token,
+        data:
+        {
+          "text":text,
+        })
+        .then((value)  {
+      searchModel=SearchModel.fromJson(value.data);
+      print(searchModel.data.data[0].id);
+      emit(ShopSuccessSearchDataState());
+    }).catchError((erorr){
+      print(erorr);
+      emit(ShopErorrSearchDataState());
+    });
+  }
+
 }

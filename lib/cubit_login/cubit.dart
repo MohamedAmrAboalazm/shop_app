@@ -13,6 +13,7 @@ class ShopLoginCubit extends Cubit<ShopLoginState>{
 
   static ShopLoginCubit get(context)=>BlocProvider.of(context);
   ShopLoginModel loginModel;
+  ShopLoginModel RegisterModel;
 
   void userLogin({@required String email,@required String password})
   {
@@ -31,6 +32,26 @@ class ShopLoginCubit extends Cubit<ShopLoginState>{
      print(e.toString());
      emit(ShopLoginErorrState(e.toString()));
    });
+  }
+  void userRegister({@required String name,@required String email,@required String password,@required String phone})
+  {
+    emit(ShopRegisterLoadingState());
+    DioHelper.postData(url:REGISTER
+        , data:
+        {
+          "name":name,
+          "email":email,
+          "password":password,
+          "phone":phone
+        }).then((value){
+      RegisterModel=ShopLoginModel.fromJson(value.data);
+      emit(ShopRegisterSucessState(RegisterModel));
+    }
+
+    ).catchError((e){
+      print(e.toString());
+      emit(ShopLoginErorrState(e.toString()));
+    });
   }
 
   IconData suffix=Icons.visibility_outlined;
