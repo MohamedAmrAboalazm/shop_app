@@ -46,6 +46,13 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   fluttertoast: ^8.0.8
   carousel_slider: ^4.0.0
+  flutter_native_splash: ^0.2.8
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/images/splash_screen.jpg"
+  android: true
+  ios : true
 
 dev_dependencies:
   flutter_test:
