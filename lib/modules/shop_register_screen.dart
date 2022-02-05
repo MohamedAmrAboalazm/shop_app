@@ -2,8 +2,8 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/cubit_login/cubit.dart';
-import 'package:shop_app/cubit_login/states.dart';
+import 'package:shop_app/cubit_login_register/cubit.dart';
+import 'package:shop_app/cubit_login_register/states.dart';
 import 'package:shop_app/modules/shop_login_screen.dart';
 import 'package:shop_app/shared/components.dart';
 
