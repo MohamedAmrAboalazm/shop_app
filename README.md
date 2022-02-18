@@ -8,11 +8,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://drive.google.com/file/d/1tKSjPDBCaAUBnhk7F-bCcI2hVUAL1ogO/view?usp=sharing">
+  <a href="https://drive.google.com/file/d/1RVkB_gUVmy-TEIoIc3PN9vNLZDrznBIA/view?usp=sharing">
     <img src="https://icon-library.com/images/shopping-app-icon/shopping-app-icon-18.jpg" alt="Logo" width="100" height="100">
   </a>
 
-  <a href="https://drive.google.com/file/d/1tKSjPDBCaAUBnhk7F-bCcI2hVUAL1ogO/view?usp=sharing">
+  <a href="https://drive.google.com/file/d/1RVkB_gUVmy-TEIoIc3PN9vNLZDrznBIA/view?usp=sharing">
       <h3 align="center">Shop App</h3>
 
   </a>
