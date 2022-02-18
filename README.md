@@ -1,16 +1,47 @@
-# shop_app
+<p align="center">
+<a href="https://linkedin.com/in/mohamedamraboalazm" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="MohamedAmrAboalazm" height="30" width="30" /></a>
+</p>
 
-A new Flutter application.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://drive.google.com/file/d/1tKSjPDBCaAUBnhk7F-bCcI2hVUAL1ogO/view?usp=sharing">
+    <img src="https://icon-library.com/images/shopping-app-icon/shopping-app-icon-18.jpg" alt="Logo" width="100" height="100">
+  </a>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  <a href="https://drive.google.com/file/d/1tKSjPDBCaAUBnhk7F-bCcI2hVUAL1ogO/view?usp=sharing">
+      <h3 align="center">Shop App</h3>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  </a>
+
+  <p align="center">
+    Flutter e-commerce app with a variety of products using API and using 
+cubit as a state management
+    <br />
+   
+  </p>
+</p>
+
+
+
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+
+
+* User can buy different products
+* User can edit your profile
+
+
+
+### Technologies Used
+
+* Flutter
+* API
+
